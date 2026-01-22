@@ -1,36 +1,42 @@
     .section .text
     .global _start
 _start:
-    li a3, 0 # counter
-    li a4, 10 # max value
+    li t0, 0
+    li t1, 10
 
 while:
-    addi a3, a3, 1 # increment counter
-    addi t0, a3, '0' # convert to ascii
+    jal ra, write
+    jal ra, sleep
+    addi t0, t0, 1
+    beq t0, t1, exit
+    j while
 
-    li a0, 1 # stdout write
+write:
+    addi t2, t0, '0'
     la a1, digit
-    sb t0, 0(a1)
+    sb t2, 0(a1)
+
+    li a0, 1
     li a2, 1
     li a7, 64
     ecall
+    ret
 
-    la a0, timespec # nanosleep
+sleep:
+    la a0, timespec
     li a1, 0
     li a7, 101
     ecall
-
-    beq a3, a4, exit
-    j while
+    ret
 
 exit:
     li a0, 0
     li a7, 93
     ecall
 
-    .section .data
-digit: .byte 0
-    .align 3
+    .section .rodata
 timespec:
     .dword 1
     .dword 0
+    .section .bss
+digit: .skip 1
