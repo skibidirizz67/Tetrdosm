@@ -1,6 +1,11 @@
     .section .text
     .global _start
 _start:
+    # set gp
+    .option push
+    .option norelax
+    lla gp, __global_pointer$
+    .option pop
     li t0, 0
     li t1, 10
 
@@ -34,9 +39,9 @@ exit:
     li a7, 93
     ecall
 
-    .section .rodata
+    .section .data
+digit: .byte 0
+.align 3
 timespec:
     .dword 1
     .dword 0
-    .section .bss
-digit: .skip 1
