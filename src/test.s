@@ -40,8 +40,7 @@ exit:
     ecall
 
     .section .data
-digit: .byte 0
-.align 3
 timespec:
     .dword 1
     .dword 0
+digit: .byte 0
