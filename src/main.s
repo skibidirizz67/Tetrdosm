@@ -2,18 +2,26 @@
     .global _start
 _start:
     li a3, 0 # counter
-    li a4, 10000 # max counter value
+    li a4, 1024 # max counter value
     li a5, 10 # digit count
-    li a2, 5
+    li a2, 2 # write len
+    li s1, 3 # biggest digit offset
 
 while:
     la a1, digit
-    addi t1, a1, 3 # i
+    add a1, a1, s1
+    mv t1, a1 # i
     mv t2, a3 # tmp
     jal b2ds
     jal write
     addi a3, a3, 1
     beq a3, a4, exit
+    lb t0, 0(a1)
+    addi t0, t0, -'0'
+    bnez t0, skip
+    addi s1, s1, -1
+    addi a2, a2, 1
+    skip:
     jal sleep
     j while
 
@@ -24,7 +32,6 @@ write:
     ret
 
 # binary to decimal sequence
-# TODO? remove trailing zeros
 b2ds: 
     remu t3, t2, a5
     addi t3, t3, '0'
