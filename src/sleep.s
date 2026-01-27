@@ -7,7 +7,8 @@ sleep:
     ecall
     ret
 
-    .section .rodata
+    .section .data
+.align 3
 timespec:
-    .dword 0
+    .dword 1
     .dword 1000000*100 # 1e6 == 1 ms
