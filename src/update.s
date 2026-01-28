@@ -51,67 +51,88 @@ bake:
     .global spawn
 spawn:
     la s7, b7bag
-    li s9, 6
+    li s8, 0
     la s4, playfield
     la s2, '#'
 lspawn:
-    bnez s9, 1f
+    bnez s8, 1f
     # fill
+    li s9, 7
+    li a1, 1
+    li a7, 278
+    2:
+    add a0, s7, s8
+    ecall
+    add a0, s7, s8
+    lb t1, 0(a0)
+    remu t1, t1, s9
+    sb t1, 0(a0)
+    addi s8, s8, 1
+    bne s8, s9, 2b
+    addi s8, s8, -1
     1:
-    add s8, s7, s9
-    lb t1, 0(s8)
-    li t2, 'I'
+    add t1, s7, s8
+    lb t1, 0(t1)
+    li t2, 0 # 'L'
     bne t1, t2, 2f
     sb s2, 3(s4)
     sb s2, 4(s4)
     sb s2, 5(s4)
     sb s2, 6(s4)
+    j 3f
     2:
-    li t2, 'J'
+    li t2, 1 # 'J'
     bne t1, t2, 2f
     sb s2, 3(s4)
     sb s2, 14(s4)
     sb s2, 15(s4)
     sb s2, 16(s4)
+    j 3f
     2:
-    li t2, 'L'
+    li t2, 2 # 'L'
     bne t1, t2, 2f
     sb s2, 14(s4)
     sb s2, 15(s4)
     sb s2, 16(s4)
     sb s2, 5(s4)
+    j 3f
     2:
-    li t2, 'O'
+    li t2, 3 # 'O'
     bne t1, t2, 2f
     sb s2, 4(s4)
     sb s2, 5(s4)
     sb s2, 15(s4)
     sb s2, 16(s4)
+    j 3f
     2:
-    li t2, 'S'
+    li t2, 4 # 'S'
     bne t1, t2, 2f
     sb s2, 3(s4)
     sb s2, 4(s4)
     sb s2, 15(s4)
     sb s2, 16(s4)
+    j 3f
     2:
-    li t2, 'T'
+    li t2, 5 # 'T'
     bne t1, t2, 2f
     sb s2, 14(s4)
     sb s2, 15(s4)
     sb s2, 4(s4)
     sb s2, 16(s4)
+    j 3f
     2:
-    li t2, 'Z'
+    li t2, 6 # 'Z'
     bne t1, t2, 2f
     sb s2, 14(s4)
     sb s2, 15(s4)
     sb s2, 4(s4)
     sb s2, 5(s4)
+    j 3f
     2:
-    
-    addi s9, s9, -1
+    sb s2, 0(s4)
+    3:
+    addi s8, s8, -1
     ret
 
     .section .data
-b7bag: .ascii "IJLOSTZ"
+b7bag: .skip 7

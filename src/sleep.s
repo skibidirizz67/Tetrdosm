@@ -11,4 +11,4 @@ sleep:
 .align 3
 timespec:
     .dword 0
-    .dword 1000000*500 # 1e6 == 1 ms
+    .dword 1000000*100 # 1e6 == 1 ms
