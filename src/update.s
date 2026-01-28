@@ -15,13 +15,14 @@ update:
     blt s1, s6, 2f
     mv t0, ra
     jal bake
+    jal spawn
     mv ra, t0
     ret
     2:
     sb s2, 11(s4)
     sb s3, 0(s4)
     1:
-    bnez s1, while 
+    bnez s1, while
     ret
 
 bake:
@@ -34,4 +35,12 @@ bake:
     sb s5, 0(s4)
     1:
     bnez s1, bwhile
+    ret
+
+    .global spawn
+spawn:
+    sb s2, 4(s4)
+    sb s2, 14(s4)
+    sb s2, 15(s4)
+    sb s2, 16(s4)
     ret
