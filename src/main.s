@@ -6,13 +6,16 @@ _start:
     .option norelax
     lla gp, __global_pointer$
     .option pop
+    jal spawn
+    1:
     jal write
     jal update
     jal sleep
     jal clear
-    j _start
+    j 1b
     j exit
 
     .section .data
     .global playfield # TODO: cell buffer zone
-playfield: .ascii ".....#....\n....###...\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n....#.....\n...###....\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n...@@.....\n"
+                      # TODO? move to .bss and initialize on start
+playfield: .ascii "..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n"
