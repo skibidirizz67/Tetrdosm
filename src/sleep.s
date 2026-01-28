@@ -10,5 +10,5 @@ sleep:
     .section .data
 .align 3
 timespec:
-    .dword 1
-    .dword 1000000*100 # 1e6 == 1 ms
+    .dword 0
+    .dword 1000000*500 # 1e6 == 1 ms

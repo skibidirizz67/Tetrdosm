@@ -5,7 +5,8 @@ Standard Tetris implemented in RV32IM assembly (with plans to implement other ar
 # References
 - https://tetris.wiki/Tetris_Guideline (tetris specification)
 - https://riscv-programming.org/book/riscv-book.html (main learning material)
-- https://jborza.com/post/2021-05-11-riscv-linux-syscalls/
+- https://jborza.com/post/2021-05-11-riscv-linux-syscalls/ (linux syscalls)
+- https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 (ANSI escape codes)
 - https://opentitan.org/book/doc/contributing/style_guides/asm_coding_style.html
 - https://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 
