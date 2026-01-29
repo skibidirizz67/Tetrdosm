@@ -3,11 +3,11 @@ Standard Tetris implemented in RV32IM assembly (with plans to implement other ar
 "A pretty ineffective way to implement tetris", one could say, -- or practically anything on that matter, -- but the goal of this project is to give me a way to explore assembly languages on practice.
 
 # References
-- https://tetris.wiki/Tetris_Guideline (tetris specification)
+- https://tetris.wiki/Tetris_Guideline (Tetris specification)
 - https://riscv-programming.org/book/riscv-book.html (main learning material)
-- https://jborza.com/post/2021-05-11-riscv-linux-syscalls/ (linux syscalls)
-- https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 (ANSI escape codes)
-- https://opentitan.org/book/doc/contributing/style_guides/asm_coding_style.html
+- https://jborza.com/post/2021-05-11-riscv-linux-syscalls/ (RISC-V Linux syscalls)
+- https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 (ANSI escape sequences cheat sheet)
+- https://opentitan.org/book/doc/contributing/style_guides/asm_coding_style.html (code style convention)
 - https://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 
 # Etymology

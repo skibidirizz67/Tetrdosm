@@ -3,58 +3,55 @@
 update: # TODO: explanation comments
         # TODO: refactor registers
     la s0, playfield
-    li s1, 11*20-1 # TODO: replace counter s4 with s1 + s0
-    li s6, 11*19+1
+    addi s1, s0, 11*20-1
+    addi s6, s0, 11*19+1
     li s2, '#'
     li s3, '.'
     li s5, '@'
     while:
     addi s1, s1, -1
-    add s4, s0, s1
-    lb t1, 0(s4)
+    lb t1, 0(s1)
     bne t1, s2, 1f
-    lb t2, 11(s4)
+    lb t2, 11(s1)
     beq t2, s5, 2f
     blt s1, s6, 1f
     2:
     mv t0, ra
     jal bake
-    jal lspawn
+    jal spawn
     mv ra, t0
     ret
     1:
-    bnez s1, while
-    li s1, 11*20-1
+    bne s1, s0, while
+    addi s1, s0, 11*20-1
     rwhile:
     addi s1, s1, -1
-    add s4, s0, s1
-    lb t1, 0(s4)
+    lb t1, 0(s1)
     bne t1, s2, 1f
-    sb s2, 11(s4)
-    sb s3, 0(s4)
+    sb s2, 11(s1)
+    sb s3, 0(s1)
     1:
-    bnez s1, rwhile
+    bne s1, s0, rwhile
     ret
 
 bake:
-    li s1, 11*20-1
+    addi s1, s0, 11*20-1
     bwhile:
     addi s1, s1, -1
-    add s4, s0, s1
-    lb t1, 0(s4)
+    lb t1, 0(s1)
     bne t1, s2, 1f
-    sb s5, 0(s4)
+    sb s5, 0(s1)
     1:
-    bnez s1, bwhile
+    bne s1, s0, bwhile
     ret
 
-    .global spawn
-spawn:
+    .global init
+init:
     la s7, b7bag
     li s8, 0
     la s4, playfield
     la s2, '#'
-lspawn:
+spawn:
     bnez s8, 1f
     # fill
     li s9, 7
