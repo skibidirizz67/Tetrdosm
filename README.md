@@ -1,6 +1,8 @@
-Standard Tetris implemented in RV32IM assembly (with plans to implement other architectures). No external functions. No macros. So far Linux-only.
+Standard* Tetris implemented in RV32IM assembly (with plans to implement other architectures). No external functions. No macros. So far Linux-only.
 
 "A pretty ineffective way to implement tetris", one could say, -- or practically anything on that matter, -- but the goal of this project is to give me a way to explore assembly languages on practice.
+
+*I couldn't find clear and official Tetris specification so some small details (e.g. buffer zone, spawn mechanics) may differ.
 
 # References
 - https://tetris.wiki/Tetris_Guideline (Tetris specification)
@@ -10,5 +12,5 @@ Standard Tetris implemented in RV32IM assembly (with plans to implement other ar
 - https://opentitan.org/book/doc/contributing/style_guides/asm_coding_style.html (code style convention)
 - https://www.cs.virginia.edu/~evans/cs216/guides/x86.html
 
-# Etymology
+### Etymology
 (tetr)is + (d)ikiy_(o)pezdal + a(sm) -> tetrdosm

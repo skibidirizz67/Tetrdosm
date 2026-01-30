@@ -13,13 +13,8 @@ _start:
     jal sleep
     jal clear
     j 1b
-    j exit
 
     .section .data
-    .global playfield # TODO: cell buffer zone
-                      # TODO: tetriton
-                      # TODO? move to .bss and initialize on start
-#bufferzone: .ascii "..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n"
-#spawnzone: .ascii "..........\n..........\n"
+    .global playfield
 playfield: .ascii "..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n"
 floor: .ascii "..........\n"

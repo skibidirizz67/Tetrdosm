@@ -25,6 +25,8 @@ $(BLDDIR) $(BINDIR):
 
 run: $(TARGET)
 	qemu-riscv64 ./$(TARGET)
+debug: $(TARGET)
+	qemu-riscv64 -g 1234 ./$(TARGET)
 
 clean:
 	rm -rf $(BLDDIR)
