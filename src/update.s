@@ -1,37 +1,64 @@
+    .macro R_EMP
+    s3
+    .endm
+    .macro R_FAL
+    s2
+    .endm
+    .macro R_STA
+    s5
+    .endm
+    .macro R_PFD
+    s0
+    .endm
+    .macro R_BAG
+    s7
+    .endm
+    .macro R_BGM
+    s9
+    .endm
+    .macro R_FLR
+    s6
+    .endm
+    
     .section .text
-    .global update
-update: # TODO: explanation comments
-        # TODO: refactor registers
-        # TODO: lines
-        # TODO: game over
-    addi s1, s0, 11*20-1
-    addi s6, s0, 11*19+1
-    li s2, '#'
+.global init
+init:
+    la s0, playfield
     li s3, '.'
+    li s2, '#'
     li s5, '@'
-    while:
+    la s7, b7bag
+    li s9, 7
+    la s6, floor
+    li s8, -1
+    j spawn
+
+    .global update
+update:
+    addi s1, s0, 11*20-1
+    0:
+    beq s1, s0, 2f
     addi s1, s1, -1
     lb t1, 0(s1)
-    bne t1, s2, 1f
-    lb t2, 11(s1)
-    beq t2, s5, 2f
-    blt s1, s6, 1f
-    2:
+    bne t1, s2, 0b
+    lb t1, 11(s1)
+    beq t1, s5, 1f
+    blt s1, s6, 0b
+    1:
     mv t0, ra
     jal lock
     jal spawn
     mv ra, t0
     ret
-    1:
-    bne s1, s0, while
+    2:
     addi s1, s0, 11*20-1
     rwhile:
     addi s1, s1, -1
     lb t1, 0(s1)
-    bne t1, s2, 1f
+    bne t1, s2, 4f
     sb s2, 11(s1)
     sb s3, 0(s1)
-    1:
+    4:
     bne s1, s0, rwhile
     ret
 
@@ -46,17 +73,7 @@ lock:
     bne s1, s0, bwhile
     ret
 
-    .global init
-init: # TODO: monoblock init
-    la s7, b7bag
-    li s8, -1
-    li s9, 7
-    la s0, playfield
-    li s2, '#'
-spawn:
-    li t1, -1
-    bne s8, t1, 1f
-    # fill
+fill:
     # TODO: make fill more efficient and smart
     li s8, 0
     li a1, 1
@@ -80,6 +97,14 @@ spawn:
     addi s8, s8, 1
     bne s8, s9, 2b
     addi s8, s8, -1
+    ret
+
+spawn:
+    li t1, -1
+    bne s8, t1, 1f
+    mv t5, ra
+    jal fill
+    mv ra, t5
     1:
     add t1, s7, s8
     lb t1, 0(t1)

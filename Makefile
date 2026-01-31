@@ -17,7 +17,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJ) | $(BINDIR)
 	$(LD) $(LDFLAGS) $^ -o $@
-$(OBJ): $(SRC) | $(BLDDIR)
+$(BLDDIR)/%.o: $(SRCDIR)/%.s| $(BLDDIR)
 	$(AS) $(ASFLAGS) $(@:$(BLDDIR)/%.o=$(SRCDIR)/%.s) -o $@
 
 $(BLDDIR) $(BINDIR):
@@ -25,6 +25,7 @@ $(BLDDIR) $(BINDIR):
 
 run: $(TARGET)
 	qemu-riscv64 ./$(TARGET)
+
 debug: $(TARGET)
 	qemu-riscv64 -g 1234 ./$(TARGET)
 

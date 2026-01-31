@@ -7,14 +7,15 @@ _start:
     lla gp, __global_pointer$
     .option pop
     jal init
-    1:
+    0:
     jal write
     jal update
     jal sleep
     jal clear
-    j 1b
+    j 0b
 
     .section .data
     .global playfield
 playfield: .ascii "..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n..........\n"
+    .global floor
 floor: .ascii "..........\n"

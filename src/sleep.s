@@ -8,7 +8,7 @@ sleep:
     ret
 
     .section .data
-.align 3
+.balign 8
 timespec:
-    .dword 0
-    .dword 1000000*100 # 1e6 == 1 ms
+    .8byte 0
+    .8byte 1000000*100 # 1e6 == 1 ms
