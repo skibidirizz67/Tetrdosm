@@ -1,6 +1,8 @@
-Classic Tetris implemented in RV32IM assembly (with plans to implement other architectures). No external functions. No macros. So far Linux-only.
+Tetris^[*] implemented in RV32IM assembly (with plans to implement other architectures). No external functions. No macros. So far Linux-only.
 
 "A pretty ineffective way to implement tetris", one could say, -- or practically anything on that matter, -- but the goal of this project is to give me a way to explore assembly languages on practice.
+
+[*] Mixture of NES and modern guideline mechanics. Since the goal is not to replicate, I picked what felt like a better exercise.
 
 # References
 - https://tetris.wiki/Tetris_Guideline (Tetris specification)

@@ -11,4 +11,4 @@ sleep:
 .balign 8
 timespec:
     .8byte 0
-    .8byte 1000000*100 # 1e6 == 1 ms
+    .8byte 1000000*500 # 1e6 == 1 ms

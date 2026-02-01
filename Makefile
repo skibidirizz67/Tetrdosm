@@ -1,11 +1,13 @@
 AS = riscv64-linux-gnu-as
+CC = riscv64-linux-gnu-gcc
 LD = riscv64-linux-gnu-ld
 
 SRCDIR = src
 BLDDIR = build
 BINDIR = bin
 
-SRC = $(wildcard $(SRCDIR)/*.s)
+SRC_AS = $(wildcard $(SRCDIR)/*.s)
+SRC_C = $(wildcard $(SRCDIR)/*.c)
 OBJ = $(SRC:$(SRCDIR)/%.s=$(BLDDIR)/%.o)
 
 ASFLAGS = 
