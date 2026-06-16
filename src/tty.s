@@ -1,20 +1,7 @@
     .section .text
-memcpy:
-    lbu a3, 0(a1)
-    sb a3, 0(a0) 
-    addi a0, a0, 1
-    addi a1, a1, 1 
-    addi a2, a2, -1
-    bnez a2, memcpy
-    li a0, 0
-    ret
-    .global _start
-_start:
-    # set gp
-    .option push
-    .option norelax
-    lla gp, __global_pointer$
-    .option pop
+    .global settty
+    .global resettty
+settty:
 # get current tty settings
     li a0, 0
     li a1, 0x5401 # TCGETS
@@ -25,7 +12,14 @@ _start:
     la a0, tty_new
     la a1, tty_old
     li a2, 26
-    jal memcpy
+memcpy:
+    lbu a3, 0(a1)
+    sb a3, 0(a0) 
+    addi a0, a0, 1
+    addi a1, a1, 1 
+    addi a2, a2, -1
+    bnez a2, memcpy
+    li a0, 0
 # modify
     la a0, tty_new
     lw a1, 12(a0)
@@ -42,6 +36,7 @@ _start:
     la a2, tty_new
     li a7, 29 # ioctl
     ecall
+    ret
 # receive and print characters until newline
     li a0, 0
     la a1, char
@@ -55,6 +50,7 @@ _start:
     ecall
     lb a4, char
     bne a3, a4, while
+resettty:
 # set old tty settings back
     li a0, 0
     li a1, 0x5402 # TCSETS

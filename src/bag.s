@@ -2,6 +2,7 @@
     .global fill
 fill:
     li a1, 1
+    li a2, 0
     li a7, 278
     li s8, 0 # counter (bag offset)
 generate:
