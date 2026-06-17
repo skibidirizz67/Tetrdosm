@@ -20,16 +20,15 @@ memcpy:
     addi a2, a2, -1
     bnez a2, memcpy
     li a0, 0
-# modify
+# modify c_lflag
     la a0, tty_new
     lw a1, 12(a0)
-    li a2, 0xFFFF7FF4 # in theory it should be equivalent of (unsigned) ~(ICANON|ISIG|IEXTEN|ECHO)
+    li a2, 0xFFFFFFF5 # (unsigned) ~(ICANON|ECHO)
     and a1, a1, a2
     sw a1, 12(a0)
-    lw a1, 0(a0)
-    li a2, 0xFFFFFBF5 # in theory it should be equivalent of (unsigned) ~(IXON|BRKINT|PARMRK)
-    and a1, a1, a2
-    sw a1, 0(a0)
+# modfiy c_cc[VTIME]
+    li a1, 0x01
+    sh a1, 22(a0) # we are using half word to also set VMIN (most significant byte) to 0
 # set new tty settings
     li a0, 0
     li a1, 0x5402 # TCSETS
@@ -62,6 +61,7 @@ resettty:
     ecall
 
     .section .data
+    .global char
 char: .ascii " \n"
 # struct __kernel_termios {
 #     unsigned int c_iflag;

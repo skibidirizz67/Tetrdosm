@@ -1,9 +1,10 @@
     .section .text
     .global sleep
 sleep:
-    la a0, timespec
-    li a1, 0
-    li a7, 101
+    la a0, 0
+    la a1, char
+    li a2, 1
+    li a7, 63
     ecall
     ret
 
