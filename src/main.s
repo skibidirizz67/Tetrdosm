@@ -23,5 +23,6 @@ while:
     jal write
     jal update
     jal sleep
+    jal handle_input
     jal clear
     j while
